@@ -51,3 +51,31 @@ if __name__ == "__main__":
 
     points = calculate_team_points(team_name, season_year)
     print(f"Points of {team_name} in {season_year} season: {points}")
+
+    seasons = master['Season'].unique()
+    print(f"Available seasons: {seasons}")
+
+    print("++++++++++++++++++++")
+
+    print("Team stats by season:")
+
+    rows = []
+    for season in seasons:
+        teams = get_unique_teams(season)
+        for team in teams:
+            goals = get_team_goals(team, season)
+            points = calculate_team_points(team, season)
+            rows.append({
+                'Season': season,
+                'Team': team,
+                'Goals Scored': goals['Goals Scored'],
+                'Points': points,
+                "Goals Conceded": goals['Goals Conceded']
+            })
+
+
+    stats_df = pd.DataFrame(rows)
+    print(stats_df.head(10))
+
+    stats_df.to_csv('team_stats_by_season.csv', index=False)
+

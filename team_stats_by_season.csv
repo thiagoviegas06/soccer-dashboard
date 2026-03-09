@@ -1,0 +1,501 @@
+Season,Team,Goals Scored,Points,Goals Conceded
+2000/01,Charlton,50,52,57
+2000/01,Chelsea,68,61,45
+2000/01,Coventry,36,34,63
+2000/01,Derby,37,42,59
+2000/01,Leeds,64,68,43
+2000/01,Leicester,39,48,51
+2000/01,Liverpool,71,69,39
+2000/01,Sunderland,46,57,41
+2000/01,Tottenham,47,49,54
+2000/01,Man United,79,80,31
+2000/01,Arsenal,63,70,38
+2000/01,Bradford,30,26,70
+2000/01,Ipswich,57,66,42
+2000/01,Middlesbrough,44,42,44
+2000/01,Everton,45,42,59
+2000/01,Man City,41,34,65
+2000/01,Newcastle,44,51,50
+2000/01,Southampton,40,52,48
+2000/01,West Ham,45,42,50
+2000/01,Aston Villa,46,54,43
+2001/02,Charlton,38,44,49
+2001/02,Derby,33,30,63
+2001/02,Leeds,53,66,37
+2001/02,Leicester,30,28,64
+2001/02,Liverpool,67,80,30
+2001/02,Middlesbrough,35,45,47
+2001/02,Sunderland,29,40,51
+2001/02,Tottenham,49,50,53
+2001/02,Chelsea,66,64,38
+2001/02,Man United,87,77,45
+2001/02,Everton,45,43,57
+2001/02,Arsenal,79,87,36
+2001/02,Bolton,44,40,62
+2001/02,Ipswich,41,36,64
+2001/02,Blackburn,55,46,51
+2001/02,Fulham,36,44,44
+2001/02,Southampton,46,45,54
+2001/02,West Ham,48,53,57
+2001/02,Aston Villa,46,50,47
+2001/02,Newcastle,74,71,52
+2002/03,Blackburn,52,60,43
+2002/03,Charlton,45,49,56
+2002/03,Everton,48,59,49
+2002/03,Fulham,41,48,50
+2002/03,Leeds,58,47,57
+2002/03,Man United,74,83,34
+2002/03,Southampton,43,52,46
+2002/03,Arsenal,85,78,42
+2002/03,Aston Villa,42,45,47
+2002/03,Newcastle,63,69,48
+2002/03,Chelsea,68,67,38
+2002/03,Birmingham,41,48,49
+2002/03,Bolton,41,44,51
+2002/03,Liverpool,61,64,41
+2002/03,Man City,47,51,54
+2002/03,Middlesbrough,48,49,44
+2002/03,Sunderland,21,19,65
+2002/03,Tottenham,51,50,62
+2002/03,West Brom,29,26,65
+2002/03,West Ham,42,42,59
+2003/04,Arsenal,61,77,23
+2003/04,Birmingham,39,48,41
+2003/04,Blackburn,44,37,49
+2003/04,Fulham,45,45,41
+2003/04,Leicester,45,33,56
+2003/04,Man United,59,66,33
+2003/04,Portsmouth,37,35,51
+2003/04,Charlton,46,45,48
+2003/04,Leeds,34,26,69
+2003/04,Liverpool,48,55,31
+2003/04,Bolton,42,46,51
+2003/04,Chelsea,63,71,27
+2003/04,Everton,40,34,50
+2003/04,Man City,44,35,45
+2003/04,Newcastle,47,52,35
+2003/04,Southampton,32,40,35
+2003/04,Tottenham,43,41,50
+2003/04,Wolves,32,31,65
+2003/04,Aston Villa,42,51,37
+2003/04,Middlesbrough,40,44,46
+2004/05,Aston Villa,41,46,42
+2004/05,Blackburn,29,39,37
+2004/05,Bolton,44,53,38
+2004/05,Man City,42,44,37
+2004/05,Middlesbrough,46,46,44
+2004/05,Norwich,37,27,67
+2004/05,Portsmouth,38,35,53
+2004/05,Tottenham,42,48,38
+2004/05,Chelsea,62,82,12
+2004/05,Everton,40,57,33
+2004/05,Birmingham,35,38,42
+2004/05,Charlton,40,45,50
+2004/05,Crystal Palace,36,27,58
+2004/05,Fulham,39,35,53
+2004/05,Liverpool,48,54,35
+2004/05,Man United,48,67,20
+2004/05,Newcastle,42,38,51
+2004/05,Southampton,37,28,55
+2004/05,Arsenal,73,71,33
+2004/05,West Brom,32,29,53
+2005/06,Aston Villa,42,42,55
+2005/06,Everton,34,50,49
+2005/06,Fulham,48,48,58
+2005/06,Man City,43,43,48
+2005/06,Middlesbrough,48,45,58
+2005/06,Portsmouth,37,38,62
+2005/06,Sunderland,26,15,69
+2005/06,West Ham,52,55,55
+2005/06,Arsenal,68,67,31
+2005/06,Wigan,45,51,52
+2005/06,Birmingham,28,34,50
+2005/06,Blackburn,51,63,42
+2005/06,Charlton,41,47,55
+2005/06,Liverpool,57,82,25
+2005/06,Man United,72,83,34
+2005/06,Newcastle,47,58,42
+2005/06,Tottenham,53,65,38
+2005/06,West Brom,31,30,58
+2005/06,Bolton,49,56,41
+2005/06,Chelsea,72,91,22
+2006/07,Arsenal,63,68,35
+2006/07,Bolton,47,56,52
+2006/07,Everton,52,58,36
+2006/07,Newcastle,38,43,47
+2006/07,Portsmouth,45,54,42
+2006/07,Reading,52,55,47
+2006/07,Sheffield United,32,38,55
+2006/07,West Ham,35,41,59
+2006/07,Chelsea,64,83,24
+2006/07,Man United,83,89,27
+2006/07,Tottenham,57,60,54
+2006/07,Watford,29,28,59
+2006/07,Aston Villa,43,50,41
+2006/07,Blackburn,52,52,54
+2006/07,Charlton,34,34,60
+2006/07,Fulham,38,39,60
+2006/07,Man City,29,42,44
+2006/07,Middlesbrough,44,46,49
+2006/07,Liverpool,57,68,27
+2006/07,Wigan,37,38,59
+2007/08,Aston Villa,71,60,51
+2007/08,Bolton,36,37,54
+2007/08,Derby,20,11,89
+2007/08,Everton,55,65,33
+2007/08,Middlesbrough,43,42,53
+2007/08,Sunderland,36,39,59
+2007/08,West Ham,42,49,50
+2007/08,Arsenal,74,83,31
+2007/08,Chelsea,65,85,26
+2007/08,Man United,80,87,22
+2007/08,Tottenham,66,46,61
+2007/08,Birmingham,46,35,62
+2007/08,Fulham,38,36,60
+2007/08,Man City,45,55,53
+2007/08,Portsmouth,48,57,40
+2007/08,Reading,41,36,66
+2007/08,Wigan,34,40,51
+2007/08,Newcastle,45,43,65
+2007/08,Blackburn,50,58,48
+2007/08,Liverpool,67,76,28
+2008/09,Arsenal,68,72,37
+2008/09,Bolton,41,41,53
+2008/09,Everton,55,63,37
+2008/09,Hull,39,35,64
+2008/09,Middlesbrough,28,32,57
+2008/09,Sunderland,34,36,54
+2008/09,West Ham,42,51,45
+2008/09,Aston Villa,54,62,48
+2008/09,Chelsea,68,83,24
+2008/09,Man United,68,90,24
+2008/09,Blackburn,40,41,60
+2008/09,Fulham,39,53,34
+2008/09,Liverpool,77,86,27
+2008/09,Newcastle,40,34,59
+2008/09,Stoke,38,45,55
+2008/09,Tottenham,45,51,45
+2008/09,West Brom,36,32,67
+2008/09,Man City,58,50,50
+2008/09,Wigan,34,45,45
+2008/09,Portsmouth,38,41,57
+2009/10,Aston Villa,52,64,39
+2009/10,Blackburn,41,50,55
+2009/10,Bolton,42,39,67
+2009/10,Chelsea,103,86,32
+2009/10,Everton,60,61,49
+2009/10,Portsmouth,34,28,66
+2009/10,Stoke,34,47,48
+2009/10,Wolves,32,38,56
+2009/10,Man United,86,85,28
+2009/10,Tottenham,67,70,41
+2009/10,Sunderland,48,44,56
+2009/10,Wigan,37,36,79
+2009/10,Birmingham,38,50,47
+2009/10,Burnley,42,30,82
+2009/10,Hull,34,30,75
+2009/10,Liverpool,61,63,35
+2009/10,Arsenal,83,75,41
+2009/10,Man City,73,67,45
+2009/10,Fulham,39,46,46
+2009/10,West Ham,47,35,66
+2010/11,Aston Villa,48,48,59
+2010/11,Blackburn,46,43,59
+2010/11,Bolton,52,46,56
+2010/11,Chelsea,69,71,33
+2010/11,Sunderland,45,47,56
+2010/11,Tottenham,55,62,46
+2010/11,Wigan,40,42,61
+2010/11,Wolves,46,40,66
+2010/11,Liverpool,59,58,44
+2010/11,Man United,78,80,37
+2010/11,Arsenal,72,68,43
+2010/11,Birmingham,37,39,58
+2010/11,Everton,51,54,45
+2010/11,Stoke,46,46,48
+2010/11,West Brom,56,47,71
+2010/11,West Ham,43,33,70
+2010/11,Fulham,49,49,43
+2010/11,Newcastle,56,46,57
+2010/11,Man City,60,71,33
+2010/11,Blackpool,55,39,78
+2011/12,Blackburn,48,31,78
+2011/12,Fulham,48,52,51
+2011/12,Liverpool,47,52,40
+2011/12,Newcastle,56,65,51
+2011/12,QPR,43,37,66
+2011/12,Wigan,42,43,62
+2011/12,Stoke,36,45,53
+2011/12,West Brom,45,47,52
+2011/12,Man City,93,89,29
+2011/12,Arsenal,74,70,49
+2011/12,Aston Villa,37,38,53
+2011/12,Chelsea,65,64,46
+2011/12,Everton,50,56,40
+2011/12,Sunderland,45,45,46
+2011/12,Swansea,44,47,51
+2011/12,Bolton,46,36,77
+2011/12,Norwich,52,47,66
+2011/12,Wolves,40,25,82
+2011/12,Man United,89,89,33
+2011/12,Tottenham,66,69,41
+2012/13,Arsenal,72,73,37
+2012/13,Fulham,50,43,60
+2012/13,Newcastle,45,41,68
+2012/13,QPR,30,25,60
+2012/13,Reading,43,28,73
+2012/13,West Brom,53,49,57
+2012/13,West Ham,45,46,53
+2012/13,Man City,66,78,34
+2012/13,Wigan,47,36,73
+2012/13,Everton,55,63,40
+2012/13,Chelsea,75,75,39
+2012/13,Aston Villa,47,41,69
+2012/13,Man United,86,89,43
+2012/13,Norwich,41,44,58
+2012/13,Southampton,49,41,60
+2012/13,Swansea,47,46,51
+2012/13,Tottenham,66,72,46
+2012/13,Liverpool,71,61,43
+2012/13,Stoke,34,42,45
+2012/13,Sunderland,41,39,54
+2013/14,Arsenal,68,79,41
+2013/14,Liverpool,101,84,50
+2013/14,Norwich,28,33,62
+2013/14,Sunderland,41,38,60
+2013/14,Swansea,54,42,54
+2013/14,West Brom,43,36,59
+2013/14,West Ham,40,40,51
+2013/14,Chelsea,71,82,27
+2013/14,Crystal Palace,33,45,48
+2013/14,Man City,102,86,37
+2013/14,Aston Villa,39,38,61
+2013/14,Everton,61,72,39
+2013/14,Fulham,40,32,85
+2013/14,Hull,38,37,53
+2013/14,Newcastle,43,49,59
+2013/14,Southampton,54,56,46
+2013/14,Stoke,45,50,52
+2013/14,Cardiff,32,30,74
+2013/14,Tottenham,55,69,51
+2013/14,Man United,64,64,43
+2014/15,Arsenal,71,75,36
+2014/15,Leicester,46,41,55
+2014/15,Man United,62,70,37
+2014/15,QPR,42,30,73
+2014/15,Stoke,48,54,45
+2014/15,West Brom,38,44,51
+2014/15,West Ham,44,47,47
+2014/15,Liverpool,52,62,48
+2014/15,Newcastle,40,39,63
+2014/15,Burnley,28,33,53
+2014/15,Aston Villa,31,38,57
+2014/15,Chelsea,73,87,32
+2014/15,Crystal Palace,47,48,51
+2014/15,Everton,48,47,50
+2014/15,Southampton,54,60,33
+2014/15,Swansea,46,56,49
+2014/15,Hull,33,35,51
+2014/15,Sunderland,31,38,53
+2014/15,Tottenham,58,64,53
+2014/15,Man City,83,79,38
+2015/16,Bournemouth,45,42,67
+2015/16,Chelsea,59,50,53
+2015/16,Everton,59,47,55
+2015/16,Leicester,68,81,36
+2015/16,Man United,49,66,35
+2015/16,Norwich,39,34,67
+2015/16,Arsenal,65,71,36
+2015/16,Newcastle,44,37,65
+2015/16,Stoke,41,51,55
+2015/16,West Brom,34,43,48
+2015/16,Aston Villa,27,17,76
+2015/16,Southampton,59,63,41
+2015/16,Sunderland,48,39,62
+2015/16,Swansea,42,47,52
+2015/16,Tottenham,69,70,35
+2015/16,Watford,40,45,50
+2015/16,West Ham,65,62,51
+2015/16,Crystal Palace,39,42,51
+2015/16,Man City,71,66,41
+2015/16,Liverpool,63,60,50
+2016/17,Burnley,39,40,55
+2016/17,Crystal Palace,50,41,63
+2016/17,Everton,62,61,44
+2016/17,Hull,37,34,80
+2016/17,Man City,80,78,39
+2016/17,Middlesbrough,27,28,53
+2016/17,Southampton,41,46,48
+2016/17,Arsenal,77,75,44
+2016/17,Bournemouth,55,46,67
+2016/17,Chelsea,85,93,33
+2016/17,Man United,54,69,29
+2016/17,Leicester,48,44,63
+2016/17,Stoke,41,44,56
+2016/17,Swansea,45,41,70
+2016/17,Tottenham,86,86,26
+2016/17,Watford,40,40,68
+2016/17,West Brom,43,45,51
+2016/17,Sunderland,29,24,69
+2016/17,West Ham,47,45,64
+2016/17,Liverpool,78,76,42
+2017/18,Arsenal,74,63,51
+2017/18,Brighton,34,40,54
+2017/18,Chelsea,62,70,38
+2017/18,Crystal Palace,45,44,55
+2017/18,Everton,44,49,58
+2017/18,Southampton,37,36,56
+2017/18,Watford,44,41,64
+2017/18,West Brom,31,31,56
+2017/18,Man United,68,81,28
+2017/18,Newcastle,39,44,47
+2017/18,Bournemouth,45,44,61
+2017/18,Burnley,36,54,39
+2017/18,Leicester,56,47,60
+2017/18,Liverpool,84,75,38
+2017/18,Stoke,35,33,68
+2017/18,Swansea,28,33,56
+2017/18,Huddersfield,28,37,58
+2017/18,Tottenham,74,77,36
+2017/18,Man City,106,100,27
+2017/18,West Ham,48,42,68
+2018/19,Man United,65,66,54
+2018/19,Bournemouth,56,45,70
+2018/19,Fulham,34,26,81
+2018/19,Huddersfield,22,16,76
+2018/19,Newcastle,42,45,48
+2018/19,Watford,52,50,59
+2018/19,Wolves,47,57,46
+2018/19,Arsenal,73,70,51
+2018/19,Liverpool,89,97,22
+2018/19,Southampton,45,39,65
+2018/19,Cardiff,34,34,69
+2018/19,Chelsea,63,72,39
+2018/19,Everton,54,54,46
+2018/19,Leicester,51,52,48
+2018/19,Tottenham,67,71,39
+2018/19,West Ham,52,52,55
+2018/19,Brighton,35,36,60
+2018/19,Burnley,45,40,68
+2018/19,Man City,95,98,23
+2018/19,Crystal Palace,51,49,53
+2019/20,Liverpool,85,99,33
+2019/20,West Ham,49,39,62
+2019/20,Bournemouth,40,34,65
+2019/20,Burnley,43,54,50
+2019/20,Crystal Palace,31,43,50
+2019/20,Watford,36,34,64
+2019/20,Tottenham,61,59,47
+2019/20,Leicester,67,62,41
+2019/20,Newcastle,38,44,58
+2019/20,Man United,66,66,36
+2019/20,Arsenal,56,56,48
+2019/20,Aston Villa,41,35,67
+2019/20,Brighton,39,41,54
+2019/20,Everton,44,49,56
+2019/20,Norwich,26,21,75
+2019/20,Southampton,51,52,60
+2019/20,Man City,102,81,35
+2019/20,Sheffield United,39,54,39
+2019/20,Chelsea,69,66,54
+2019/20,Wolves,51,59,40
+2020/21,Fulham,27,28,53
+2020/21,Crystal Palace,41,44,66
+2020/21,Liverpool,68,69,42
+2020/21,West Ham,62,65,47
+2020/21,West Brom,35,26,76
+2020/21,Tottenham,68,62,45
+2020/21,Brighton,40,41,46
+2020/21,Sheffield United,20,23,63
+2020/21,Everton,47,59,48
+2020/21,Leeds,62,59,54
+2020/21,Man United,73,74,44
+2020/21,Arsenal,55,61,39
+2020/21,Southampton,47,43,68
+2020/21,Newcastle,46,45,62
+2020/21,Chelsea,58,67,36
+2020/21,Leicester,68,66,50
+2020/21,Aston Villa,55,55,46
+2020/21,Wolves,36,45,52
+2020/21,Burnley,33,39,55
+2020/21,Man City,83,86,32
+2021/22,Brentford,48,46,56
+2021/22,Man United,57,58,57
+2021/22,Burnley,34,35,53
+2021/22,Chelsea,76,74,33
+2021/22,Everton,43,39,66
+2021/22,Leicester,62,52,59
+2021/22,Watford,34,23,77
+2021/22,Norwich,23,22,84
+2021/22,Newcastle,44,49,62
+2021/22,Tottenham,69,71,40
+2021/22,Liverpool,94,92,26
+2021/22,Aston Villa,52,45,54
+2021/22,Crystal Palace,50,48,46
+2021/22,Leeds,42,38,79
+2021/22,Man City,99,93,26
+2021/22,Brighton,42,51,44
+2021/22,Southampton,43,40,67
+2021/22,Wolves,38,51,43
+2021/22,Arsenal,61,69,48
+2021/22,West Ham,60,56,51
+2022/23,Crystal Palace,40,45,49
+2022/23,Fulham,55,52,53
+2022/23,Bournemouth,37,39,71
+2022/23,Leeds,48,31,78
+2022/23,Newcastle,68,71,33
+2022/23,Tottenham,70,60,63
+2022/23,Everton,34,36,57
+2022/23,Leicester,51,34,68
+2022/23,Man United,58,75,43
+2022/23,West Ham,42,40,55
+2022/23,Aston Villa,51,61,46
+2022/23,Arsenal,88,84,43
+2022/23,Brighton,72,62,53
+2022/23,Man City,94,89,33
+2022/23,Southampton,36,25,73
+2022/23,Wolves,31,41,58
+2022/23,Brentford,58,59,46
+2022/23,Nott'm Forest,38,38,68
+2022/23,Chelsea,38,44,47
+2022/23,Liverpool,75,67,47
+2023/24,Burnley,41,24,78
+2023/24,Arsenal,91,89,29
+2023/24,Bournemouth,54,48,67
+2023/24,Brighton,55,48,62
+2023/24,Everton,40,48,51
+2023/24,Sheffield United,35,16,104
+2023/24,Newcastle,85,60,62
+2023/24,Brentford,56,39,65
+2023/24,Chelsea,77,63,63
+2023/24,Man United,57,60,58
+2023/24,Nott'm Forest,49,36,67
+2023/24,Fulham,55,47,61
+2023/24,Liverpool,86,82,41
+2023/24,Wolves,50,46,65
+2023/24,Tottenham,74,66,61
+2023/24,Man City,96,91,34
+2023/24,Aston Villa,76,68,61
+2023/24,West Ham,60,52,74
+2023/24,Crystal Palace,57,49,58
+2023/24,Luton,52,26,85
+2024/25,Man United,42,39,51
+2024/25,Ipswich,35,22,76
+2024/25,Arsenal,64,67,31
+2024/25,Everton,36,39,43
+2024/25,Newcastle,66,63,45
+2024/25,Nott'm Forest,54,61,42
+2024/25,West Ham,40,37,59
+2024/25,Brentford,62,52,53
+2024/25,Chelsea,62,63,41
+2024/25,Leicester,29,21,76
+2024/25,Brighton,57,52,56
+2024/25,Crystal Palace,44,46,48
+2024/25,Fulham,50,51,47
+2024/25,Man City,67,64,43
+2024/25,Southampton,25,11,82
+2024/25,Tottenham,63,38,57
+2024/25,Aston Villa,55,60,49
+2024/25,Bournemouth,55,53,42
+2024/25,Wolves,51,41,62
+2024/25,Liverpool,81,82,35
