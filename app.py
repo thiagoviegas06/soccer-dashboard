@@ -134,7 +134,7 @@ app.layout = html.Div([
         dcc.Dropdown(
             id='line-team-dropdown',
             options=team_options,
-            value=[(team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value'])],
+            value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
             multi=True
         ),
         dcc.Graph(id='line-graph')
