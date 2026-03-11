@@ -126,52 +126,74 @@ def bar_chart(selected_season):
 
 
 app.layout = html.Div([
-    html.H1("Team Stats Dashboard"),
-    # Visualization 1: Line plot (Goals Scored by Season)
+    # Header
     html.Div([
-        html.H3("Goals Scored by Season (Line Plot)"),
-        html.Label("Select Teams:"),
-        dcc.Dropdown(
-            id='line-team-dropdown',
-            options=team_options,
-            value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
-            multi=True
-        ),
-        dcc.Graph(id='line-graph')
-    ], style={'width': '80%', 'margin': 'auto', 'padding': '20px', 'backgroundColor': '#f9f9f9', 'marginBottom': '30px', 'borderRadius': '10px'}),
+        html.H1("Premier League Team Stats"),
+        html.P("Historical performance across seasons", className='dashboard-subtitle')
+    ], className='dashboard-header'),
 
-    # Visualization 2: Scatter plot (Goals Conceded vs Goals Scored)
     html.Div([
-        html.H3("Goals Conceded vs Goals Scored (Scatter Plot)"),
-        html.Label("Select Teams:"),
-        dcc.Dropdown(
-            id='scatter-team-dropdown',
-            options=team_options,
-            value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
-            multi=True
-        ),
-        html.Label("Select Season:"),
-        dcc.Dropdown(
-            id='scatter-season-dropdown',
-            options=season_options,
-            value=season_options[0]['value'],
-            multi=False
-        ),
-        dcc.Graph(id='scatter-graph')
-    ], style={'width': '80%', 'margin': 'auto', 'padding': '20px', 'backgroundColor': '#f9f9f9', 'marginBottom': '30px', 'borderRadius': '10px'}),
+        # Visualization 1: Line plot
+        html.Div([
+            html.H3("Goals Scored by Season"),
+            html.Div([
+                html.Div([
+                    html.Label("Teams"),
+                    dcc.Dropdown(
+                        id='line-team-dropdown',
+                        options=team_options,
+                        value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
+                        multi=True
+                    ),
+                ], className='control-group'),
+            ], className='controls-row'),
+            dcc.Graph(id='line-graph')
+        ], className='chart-card'),
 
-    # Visualization 3: Bar plot (Points by Team)
-    html.Div([
-        html.H3("Points by Team (Bar Plot)"),
-        html.Label("Select Season:"),
-        dcc.Dropdown(
-            id='bar-season-dropdown',
-            options=season_options,
-            value=season_options[0]['value'],
-            multi=False
-        ),
-        dcc.Graph(id='bar-graph')
-    ], style={'width': '80%', 'margin': 'auto', 'padding': '20px', 'backgroundColor': '#f9f9f9', 'marginBottom': '30px', 'borderRadius': '10px'})
+        # Visualization 2: Scatter plot
+        html.Div([
+            html.H3("Goals Conceded vs Goals Scored"),
+            html.Div([
+                html.Div([
+                    html.Label("Teams"),
+                    dcc.Dropdown(
+                        id='scatter-team-dropdown',
+                        options=team_options,
+                        value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
+                        multi=True
+                    ),
+                ], className='control-group'),
+                html.Div([
+                    html.Label("Season"),
+                    dcc.Dropdown(
+                        id='scatter-season-dropdown',
+                        options=season_options,
+                        value=season_options[0]['value'],
+                        multi=False
+                    ),
+                ], className='control-group'),
+            ], className='controls-row'),
+            dcc.Graph(id='scatter-graph')
+        ], className='chart-card'),
+
+        # Visualization 3: Bar plot
+        html.Div([
+            html.H3("Points by Team"),
+            html.Div([
+                html.Div([
+                    html.Label("Season"),
+                    dcc.Dropdown(
+                        id='bar-season-dropdown',
+                        options=season_options,
+                        value=season_options[0]['value'],
+                        multi=False
+                    ),
+                ], className='control-group'),
+            ], className='controls-row'),
+            dcc.Graph(id='bar-graph')
+        ], className='chart-card'),
+
+    ], className='page-wrapper')
 ])
 # Line plot callback
 @app.callback(
