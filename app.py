@@ -16,36 +16,36 @@ for season, team in team_with_most_points_per_season.items():
 
 # Define consistent team colors
 team_color_map = {
-    "Man United": "#DA291C",   # Red
-    "Man City": "#6CABDD",     # Sky Blue
-    "Chelsea": "#003090",      # Blue
-    "Arsenal": "#DA291C",      # Red
-    "Liverpool": "#DA291C",    # Red
-    "Tottenham": "#132257",    # Navy
-    "Leeds": "#FFCD00",        # Yellow
-    "Leicester": "#003090",    # Blue
-    "Everton": "#003399",      # Blue
-    "Newcastle": "#241F20",    # Black
+    "Man United": "#DA291C",   
+    "Man City": "#6CABDD",     
+    "Chelsea": "#003090",      
+    "Arsenal": "#DA291C",      
+    "Liverpool": "#DA291C",    
+    "Tottenham": "#132257",    
+    "Leeds": "#FFCD00",        
+    "Leicester": "#003090",    
+    "Everton": "#003399",      
+    "Newcastle": "#241F20",    
 }
 
 # Fallback color pool — wide variety to maximize distinctiveness when picking dynamically
 fallback_colors = [
-    "#8E44AD",  # Purple
-    "#16A085",  # Teal
-    "#E67E22",  # Orange
-    "#1ABC9C",  # Aqua
-    "#9B59B6",  # Violet
-    "#F39C12",  # Amber
-    "#27AE60",  # Green
-    "#D35400",  # Dark Orange
-    "#2ECC71",  # Lime Green
-    "#7F8C8D",  # Gray
-    "#BDC3C7",  # Silver
-    "#E91E63",  # Pink
-    "#00BCD4",  # Cyan
-    "#FF7043",  # Deep Orange
-    "#795548",  # Brown
-    "#607D8B",  # Blue Gray
+    "#8E44AD",  
+    "#16A085",  
+    "#E67E22",  
+    "#1ABC9C",  
+    "#9B59B6",  
+    "#F39C12",  
+    "#27AE60",  
+    "#D35400",  
+    "#2ECC71",  
+    "#7F8C8D",  
+    "#BDC3C7",  
+    "#E91E63",  
+    "#00BCD4", 
+    "#FF7043",  
+    "#795548",  
+    "#607D8B", 
 ]
 
 def _hex_to_rgb(color):
@@ -181,6 +181,15 @@ app.layout = html.Div([
             html.H3("Points by Team"),
             html.Div([
                 html.Div([
+                    html.Label("Teams"),
+                    dcc.Dropdown(
+                        id='bar-team-dropdown',
+                        options=team_options,
+                        value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
+                        multi=True
+                    ),
+                ], className='control-group'),
+                html.Div([
                     html.Label("Season"),
                     dcc.Dropdown(
                         id='bar-season-dropdown',
@@ -248,12 +257,12 @@ def update_scatter(selected_teams, selected_season):
 # Bar plot callback
 @app.callback(
     Output('bar-graph', 'figure'),
-    Input('bar-season-dropdown', 'value')
+    [Input('bar-team-dropdown', 'value'),
+     Input('bar-season-dropdown', 'value')]
 )
-def update_bar(selected_season):
-    filtered_df = df[df['Season'] == selected_season].copy()
-    filtered_df = filtered_df.sort_values('Team')
-    filtered_df = filtered_df.head(7)
+def update_bar(selected_teams, selected_season):
+    filtered_df = df[(df['Season'] == selected_season) & (df['Team'].isin(selected_teams))].copy()
+    filtered_df = filtered_df.sort_values('Points', ascending=False)
     color_map = get_team_color_map(filtered_df['Team'].unique())
     fig = px.bar(
         filtered_df,
