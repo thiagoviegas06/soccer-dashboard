@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from dash import Dash, html, dcc, Input, Output
+=======
+from dash import Dash, html, dcc, Input, Output, State, callback_context
+>>>>>>> f57de73 (updated dashboard)
 import plotly.express as px
 import pandas as pd
 
@@ -204,6 +208,10 @@ app.layout = html.Div([
 
     ], className='page-wrapper')
 ])
+<<<<<<< HEAD
+=======
+
+>>>>>>> f57de73 (updated dashboard)
 # Line plot callback
 @app.callback(
     Output('line-graph', 'figure'),
@@ -251,6 +259,25 @@ def update_scatter(selected_teams, selected_season):
         title=f"Goals Conceded vs Goals Scored ({selected_season})",
         color_discrete_map=color_map
     )
+<<<<<<< HEAD
+=======
+
+    # Apply opacity based on season
+    for trace in fig.data:
+        season = trace.customdata[0][3] if trace.customdata is not None and len(trace.customdata[0]) > 3 else None
+        if season in opacity_map:
+            trace.marker.opacity = opacity_map[season]
+
+    # Enhance size encoding to make point differences more pronounced
+    fig.update_traces(
+        marker=dict(
+            sizemode='area',
+            sizeref= global_max_points / (40.0 ** 2),  # Smaller denominator = smaller markers
+            sizemin=4,  # Minimum marker size
+            line=dict(width=1.5, color='white')  # White border for clarity
+        )
+    )
+>>>>>>> f57de73 (updated dashboard)
     return fig
 
 
@@ -275,5 +302,101 @@ def update_bar(selected_teams, selected_season):
     return fig
 
 
+<<<<<<< HEAD
+=======
+# Consolidated callback for team selection - handles dropdowns and click events
+@app.callback(
+    [Output('shared-teams-store', 'data'),
+     Output('line-team-dropdown', 'value'),
+     Output('scatter-team-dropdown', 'value'),
+     Output('bar-team-dropdown', 'value')],
+    [Input('line-team-dropdown', 'value'),
+     Input('scatter-team-dropdown', 'value'),
+     Input('bar-team-dropdown', 'value'),
+     Input('line-graph', 'clickData'),
+     Input('scatter-graph', 'clickData'),
+     Input('bar-graph', 'clickData')],
+    State('shared-teams-store', 'data')
+)
+def update_teams(line_teams, scatter_teams, bar_teams, line_click, scatter_click, bar_click, current_store):
+    if not callback_context.triggered:
+        return current_store, current_store, current_store, current_store
+
+    trigger_id = callback_context.triggered[0]['prop_id'].split('.')[0]
+    selected_teams = current_store or default_teams
+
+    # Handle dropdown changes
+    if trigger_id == 'line-team-dropdown':
+        selected_teams = line_teams or default_teams
+    elif trigger_id == 'scatter-team-dropdown':
+        selected_teams = scatter_teams or default_teams
+    elif trigger_id == 'bar-team-dropdown':
+        selected_teams = bar_teams or default_teams
+
+    # Handle click-to-filter
+    elif trigger_id == 'line-graph' and line_click:
+        try:
+            clicked_team = line_click['points'][0]['legendgroup']
+            if clicked_team in selected_teams:
+                selected_teams = [t for t in selected_teams if t != clicked_team]
+            else:
+                selected_teams = list(selected_teams) + [clicked_team]
+        except (KeyError, IndexError, TypeError):
+            pass
+    elif trigger_id == 'scatter-graph' and scatter_click:
+        try:
+            clicked_team = scatter_click['points'][0]['legendgroup']
+            if clicked_team in selected_teams:
+                selected_teams = [t for t in selected_teams if t != clicked_team]
+            else:
+                selected_teams = list(selected_teams) + [clicked_team]
+        except (KeyError, IndexError, TypeError):
+            pass
+    elif trigger_id == 'bar-graph' and bar_click:
+        try:
+            clicked_team = bar_click['points'][0]['legendgroup']
+            if clicked_team in selected_teams:
+                selected_teams = [t for t in selected_teams if t != clicked_team]
+            else:
+                selected_teams = list(selected_teams) + [clicked_team]
+        except (KeyError, IndexError, TypeError):
+            pass
+
+    # Enforce max 7 teams
+    if selected_teams and len(selected_teams) > 7:
+        selected_teams = selected_teams[:7]
+
+    if not selected_teams:
+        selected_teams = default_teams
+
+    return selected_teams, selected_teams, selected_teams, selected_teams
+
+
+# Consolidated callback for season selection
+@app.callback(
+    [Output('shared-seasons-store', 'data'),
+     Output('scatter-season-dropdown', 'value'),
+     Output('bar-season-dropdown', 'value')],
+    [Input('scatter-season-dropdown', 'value'),
+     Input('bar-season-dropdown', 'value')],
+    State('shared-seasons-store', 'data')
+)
+def update_seasons(scatter_seasons, bar_seasons, current_store):
+    if not callback_context.triggered:
+        return current_store, current_store, current_store
+
+    trigger_id = callback_context.triggered[0]['prop_id'].split('.')[0]
+
+    if trigger_id == 'scatter-season-dropdown':
+        selected_seasons = scatter_seasons or default_seasons
+    elif trigger_id == 'bar-season-dropdown':
+        selected_seasons = bar_seasons or default_seasons
+    else:
+        selected_seasons = current_store or default_seasons
+
+    return selected_seasons, selected_seasons, selected_seasons
+
+
+>>>>>>> f57de73 (updated dashboard)
 if __name__ == "__main__":
     app.run(debug=True)

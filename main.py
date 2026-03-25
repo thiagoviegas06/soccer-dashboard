@@ -35,47 +35,8 @@ def calculate_team_points(team_name, season_year):
 
 
 if __name__ == "__main__":
-    season_year = "2000/01"
-    teams = get_unique_teams(season_year)
-    print(f"Teams in {season_year} season: {teams}")
+    df = pd.read_csv('team_stats_by_season.csv')
+    teams = df['Team'].unique()
+    sorted_teams = sorted(teams)
 
-    team_name = 'Man United'
-    team_data = get_team_data(team_name, season_year)
-    print(f"Data for {team_name} in {season_year} season:\n{team_data.head()}")
-
-    performance = get_team_performance(team_name, season_year)
-    print(f"Performance of {team_name} in {season_year} season: {performance}")
-
-    goals = get_team_goals(team_name, season_year)
-    print(f"Goals of {team_name} in {season_year} season: {{'Goals Scored': {goals['Goals Scored']}, 'Goals Conceded': {goals['Goals Conceded']}}}")
-
-    points = calculate_team_points(team_name, season_year)
-    print(f"Points of {team_name} in {season_year} season: {points}")
-
-    seasons = master['Season'].unique()
-    print(f"Available seasons: {seasons}")
-
-    print("++++++++++++++++++++")
-
-    print("Team stats by season:")
-
-    rows = []
-    for season in seasons:
-        teams = get_unique_teams(season)
-        for team in teams:
-            goals = get_team_goals(team, season)
-            points = calculate_team_points(team, season)
-            rows.append({
-                'Season': season,
-                'Team': team,
-                'Goals Scored': goals['Goals Scored'],
-                'Points': points,
-                "Goals Conceded": goals['Goals Conceded']
-            })
-
-
-    stats_df = pd.DataFrame(rows)
-    print(stats_df.head(10))
-
-    stats_df.to_csv('team_stats_by_season.csv', index=False)
-
+    print(sorted_teams)
