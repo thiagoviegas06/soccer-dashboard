@@ -1,135 +1,30 @@
-<<<<<<< HEAD
-from dash import Dash, html, dcc, Input, Output
-=======
 from dash import Dash, html, dcc, Input, Output, State, callback_context
->>>>>>> f57de73 (updated dashboard)
 import plotly.express as px
 import pandas as pd
+from team_colors import assign_plot_colors
 
 app = Dash(__name__)
+
+# Global cache to maintain color consistency across plots
+color_cache = {}
 
 df = pd.read_csv('team_stats_by_season.csv')
 team_with_most_points = df.loc[df['Points'].idxmax()]['Team']
 sorted_teams = df.groupby('Team')['Points'].sum().sort_values(ascending=False)
 team_options = [{'label': team, 'value': team} for team in sorted_teams.index]
+teams = df['Team'].unique()
 
-team_with_most_points_per_season = df.groupby('Season').apply(lambda x: x.loc[x['Points'].idxmax()]['Team'])
-print("Team with the most points per season:")
-for season, team in team_with_most_points_per_season.items():
-    print(f"{season}: {team}")  
-
-# Define consistent team colors
-team_color_map = {
-    "Man United": "#DA291C",   
-    "Man City": "#6CABDD",     
-    "Chelsea": "#003090",      
-    "Arsenal": "#DA291C",      
-    "Liverpool": "#DA291C",    
-    "Tottenham": "#132257",    
-    "Leeds": "#FFCD00",        
-    "Leicester": "#003090",    
-    "Everton": "#003399",      
-    "Newcastle": "#241F20",    
-}
-
-# Fallback color pool — wide variety to maximize distinctiveness when picking dynamically
-fallback_colors = [
-    "#8E44AD",  
-    "#16A085",  
-    "#E67E22",  
-    "#1ABC9C",  
-    "#9B59B6",  
-    "#F39C12",  
-    "#27AE60",  
-    "#D35400",  
-    "#2ECC71",  
-    "#7F8C8D",  
-    "#BDC3C7",  
-    "#E91E63",  
-    "#00BCD4", 
-    "#FF7043",  
-    "#795548",  
-    "#607D8B", 
-]
-
-def _hex_to_rgb(color):
-    return int(color[1:3], 16), int(color[3:5], 16), int(color[5:7], 16)
-
-def _color_distance(c1, c2):
-    r1, g1, b1 = _hex_to_rgb(c1)
-    r2, g2, b2 = _hex_to_rgb(c2)
-    return ((r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2) ** 0.5
-
-def _pick_most_distinct(candidates, used_colors):
-    """Return the candidate that maximizes its minimum distance to all used colors."""
-    if not used_colors:
-        return candidates[0]
-    return max(candidates, key=lambda c: min(_color_distance(c, u) for u in used_colors))
-
-def get_team_color_map(displayed_teams):
-    """
-    Returns a color map for the given teams, using team_color_map if available.
-    If two or more teams share the same preferred color, all of them get fallback colors.
-    Fallbacks are chosen greedily to maximize perceptual distance from already-used colors.
-    """
-    # Find preferred colors claimed by more than one displayed team
-    color_usage = {}
-    for team in displayed_teams:
-        preferred = team_color_map.get(team)
-        if preferred:
-            color_usage.setdefault(preferred, []).append(team)
-    conflicted_colors = {color for color, teams in color_usage.items() if len(teams) > 1}
-
-    color_map = {}
-    used_colors = set()
-
-    # First pass: assign unique preferred colors (no conflicts)
-    for team in displayed_teams:
-        preferred = team_color_map.get(team)
-        if preferred and preferred not in conflicted_colors:
-            color_map[team] = preferred
-            used_colors.add(preferred)
-
-    # Second pass: assign fallbacks, picking the most distinct color each time
-    remaining_fallbacks = [c for c in fallback_colors if c not in used_colors]
-    for team in displayed_teams:
-        if team not in color_map:
-            if remaining_fallbacks:
-                chosen = _pick_most_distinct(remaining_fallbacks, used_colors)
-                remaining_fallbacks.remove(chosen)
-            else:
-                chosen = "#888888"
-            color_map[team] = chosen
-            used_colors.add(chosen)
-
-    return color_map
 season_options = [{'label': season, 'value': season} for season in sorted(df['Season'].unique())]
 
-def position_to_symbol(position):
-    if position == 1:
-        return "🏆"
-    elif position <= 4:
-        return "🔝"
-    elif position >= 18:
-        return "⚠️"
-    else:
-        return ""
-
-def bar_chart(selected_season):
-    filtered_df = df[df['Season'] == selected_season]
-    fig = px.bar(
-        filtered_df,
-        x="Points",
-        y="Year",
-        color="Team",
-        title=f"Points by Team in {selected_season} Season"
-    )
-    return fig
-
-
-
+# Default selections for stores
+default_teams = [team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']]
+default_seasons = sorted(df['Season'].unique())[-3:] if len(df['Season'].unique()) >= 3 else sorted(df['Season'].unique())
 
 app.layout = html.Div([
+    # Shared state stores for cross-filtering
+    dcc.Store(id='shared-teams-store', data=default_teams),
+    dcc.Store(id='shared-seasons-store', data=default_seasons),
+
     # Header
     html.Div([
         html.H1("Premier League Team Stats"),
@@ -167,71 +62,6 @@ app.layout = html.Div([
             # Visualization 1: Scatter plot (top-left)
             html.Div([
                 html.Div([
-<<<<<<< HEAD
-                    html.Label("Teams"),
-                    dcc.Dropdown(
-                        id='line-team-dropdown',
-                        options=team_options,
-                        value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
-                        multi=True
-                    ),
-                ], className='control-group'),
-            ], className='controls-row'),
-            dcc.Graph(id='line-graph')
-        ], className='chart-card'),
-
-        # Visualization 2: Scatter plot
-        html.Div([
-            html.H3("Goals Conceded vs Goals Scored"),
-            html.Div([
-                html.Div([
-                    html.Label("Teams"),
-                    dcc.Dropdown(
-                        id='scatter-team-dropdown',
-                        options=team_options,
-                        value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
-                        multi=True
-                    ),
-                ], className='control-group'),
-                html.Div([
-                    html.Label("Season"),
-                    dcc.Dropdown(
-                        id='scatter-season-dropdown',
-                        options=season_options,
-                        value=season_options[0]['value'],
-                        multi=False
-                    ),
-                ], className='control-group'),
-            ], className='controls-row'),
-            dcc.Graph(id='scatter-graph')
-        ], className='chart-card'),
-
-        # Visualization 3: Bar plot
-        html.Div([
-            html.H3("Points by Team"),
-            html.Div([
-                html.Div([
-                    html.Label("Teams"),
-                    dcc.Dropdown(
-                        id='bar-team-dropdown',
-                        options=team_options,
-                        value=[team_options[0]['value'], team_options[1]['value'], team_options[2]['value'], team_options[3]['value'], team_options[4]['value']],
-                        multi=True
-                    ),
-                ], className='control-group'),
-                html.Div([
-                    html.Label("Season"),
-                    dcc.Dropdown(
-                        id='bar-season-dropdown',
-                        options=season_options,
-                        value=season_options[0]['value'],
-                        multi=False
-                    ),
-                ], className='control-group'),
-            ], className='controls-row'),
-            dcc.Graph(id='bar-graph')
-        ], className='chart-card'),
-=======
                     html.H3("Goals Conceded vs Goals Scored"),
                     html.P("Bubble size represents Points earned | Opacity represents Season recency", className='chart-subtitle')
                 ], className='chart-header'),
@@ -254,29 +84,32 @@ app.layout = html.Div([
             ], className='chart-header'),
             dcc.Graph(id='line-graph', clickData=None)
         ], className='chart-card chart-full'),
->>>>>>> da55da3 (updated dashboard layout)
 
     ], className='page-wrapper')
 ])
-<<<<<<< HEAD
-=======
 
->>>>>>> f57de73 (updated dashboard)
 # Line plot callback
 @app.callback(
     Output('line-graph', 'figure'),
-    Input('line-team-dropdown', 'value')
+    Input('shared-teams-store', 'data')
 )
 
 def update_line(selected_teams):
+    global color_cache
+
+    if not selected_teams:
+        selected_teams = default_teams
+
     filtered_df = df[df['Team'].isin(selected_teams)]
-    color_map = get_team_color_map(selected_teams)
+    color_map, color_cache = assign_plot_colors(selected_teams, cached_colors=color_cache)
+
     # Define a list of unique symbols (Plotly supports many)
     symbol_list = [
         "circle", "square", "diamond", "cross", "x", "triangle-up", "triangle-down", "triangle-left", "triangle-right", "star", "hexagram", "hourglass", "bowtie", "asterisk", "hash"
     ]
     # Map each team to a symbol
     team_symbols = {team: symbol_list[i % len(symbol_list)] for i, team in enumerate(selected_teams)}
+
     fig = px.line(
         filtered_df,
         x="Season",
@@ -301,12 +134,34 @@ def update_line(selected_teams):
 # Scatter plot callback
 @app.callback(
     Output('scatter-graph', 'figure'),
-    [Input('scatter-team-dropdown', 'value'),
-     Input('scatter-season-dropdown', 'value')]
+    [Input('shared-teams-store', 'data'),
+     Input('shared-seasons-store', 'data')]
 )
-def update_scatter(selected_teams, selected_season):
-    filtered_df = df[(df['Team'].isin(selected_teams)) & (df['Season'] == selected_season)]
-    color_map = get_team_color_map(filtered_df['Team'].unique())
+def update_scatter(selected_teams, selected_seasons):
+    global color_cache
+
+    if not selected_teams:
+        selected_teams = default_teams
+    if not selected_seasons:
+        selected_seasons = default_seasons
+
+    # Handle single season vs list of seasons
+    if isinstance(selected_seasons, str):
+        selected_seasons = [selected_seasons]
+
+    filtered_df = df[(df['Team'].isin(selected_teams)) & (df['Season'].isin(selected_seasons))]
+    color_map, color_cache = assign_plot_colors(selected_teams, cached_colors=color_cache)
+
+    # Use global max points for consistent sizing across all seasons
+    global_max_points = df['Points'].max()
+
+    # Sort seasons and assign opacity (recent seasons more opaque, older seasons more faded)
+    sorted_seasons = sorted(selected_seasons)
+    opacity_map = {}
+    for i, season in enumerate(sorted_seasons):
+        # Opacity ranges from 0.5 (oldest) to 1.0 (newest)
+        opacity_map[season] = 0.5 + (i / max(len(sorted_seasons) - 1, 1)) * 0.5
+
     fig = px.scatter(
         filtered_df,
         x="Goals Conceded",
@@ -314,15 +169,9 @@ def update_scatter(selected_teams, selected_season):
         color="Team",
         size="Points",
         hover_name="Team",
-<<<<<<< HEAD
-        title=f"Goals Conceded vs Goals Scored ({selected_season})",
-=======
         hover_data={"Points": True, "Goals Scored": True, "Goals Conceded": True, "Season": True},
->>>>>>> da55da3 (updated dashboard layout)
         color_discrete_map=color_map
     )
-<<<<<<< HEAD
-=======
 
     # Apply opacity based on season
     for trace in fig.data:
@@ -339,9 +188,6 @@ def update_scatter(selected_teams, selected_season):
             line=dict(width=1.5, color='white')  # White border for clarity
         )
     )
-<<<<<<< HEAD
->>>>>>> f57de73 (updated dashboard)
-=======
 
     fig.update_layout(
         showlegend=False,
@@ -349,36 +195,41 @@ def update_scatter(selected_teams, selected_season):
         margin=dict(l=50, r=50, t=15, b=50)
     )
 
->>>>>>> da55da3 (updated dashboard layout)
     return fig
 
 
 # Bar plot callback
 @app.callback(
     Output('bar-graph', 'figure'),
-    [Input('bar-team-dropdown', 'value'),
-     Input('bar-season-dropdown', 'value')]
+    [Input('shared-teams-store', 'data'),
+     Input('shared-seasons-store', 'data')]
 )
-def update_bar(selected_teams, selected_season):
-    filtered_df = df[(df['Season'] == selected_season) & (df['Team'].isin(selected_teams))].copy()
-    filtered_df = filtered_df.sort_values('Points', ascending=False)
-    color_map = get_team_color_map(filtered_df['Team'].unique())
+def update_bar(selected_teams, selected_seasons):
+    global color_cache
+
+    if not selected_teams:
+        selected_teams = default_teams
+    if not selected_seasons:
+        selected_seasons = default_seasons
+
+    # Handle single season vs list of seasons
+    if isinstance(selected_seasons, str):
+        selected_seasons = [selected_seasons]
+
+    # Calculate placement based on ALL teams in each season, then filter
+    season_filtered_df = df[df['Season'].isin(selected_seasons)].copy()
+    season_filtered_df['Placement'] = season_filtered_df.groupby('Season')['Points'].rank(method='min', ascending=False).astype(int)
+
+    # Now filter to only selected teams
+    filtered_df = season_filtered_df[season_filtered_df['Team'].isin(selected_teams)].copy()
+
+    color_map, color_cache = assign_plot_colors(selected_teams, cached_colors=color_cache)
+
     fig = px.bar(
         filtered_df,
-        x="Team",
+        x="Season",
         y="Points",
         color="Team",
-<<<<<<< HEAD
-        title=f"Points by Team ({selected_season})",
-        color_discrete_map=color_map
-    )
-    return fig
-
-
-<<<<<<< HEAD
-=======
-# Consolidated callback for team selection - handles dropdowns and click events
-=======
         barmode="group",
         color_discrete_map=color_map,
         hover_data={"Season": True, "Team": True, "Points": True, "Placement": True},
@@ -402,7 +253,6 @@ def update_bar(selected_teams, selected_season):
 
 
 # Consolidated callback for team selection - handles dropdown and click events
->>>>>>> da55da3 (updated dashboard layout)
 @app.callback(
     [Output('shared-teams-store', 'data'),
      Output('unified-team-dropdown', 'value')],
@@ -506,6 +356,5 @@ def update_legend(selected_teams):
     return html.Div(legend_items, className='legend-items')
 
 
->>>>>>> f57de73 (updated dashboard)
 if __name__ == "__main__":
     app.run(debug=True)
