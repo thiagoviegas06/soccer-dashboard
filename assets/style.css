@@ -13,9 +13,9 @@ body {
 
 /* ── Page wrapper ── */
 .page-wrapper {
-    max-width: 1100px;
+    max-width: 80%;
     margin: 0 auto;
-    padding: 0 24px 48px;
+    padding: 0 16px 32px;
 }
 
 /* ── Header ── */
@@ -45,17 +45,33 @@ body {
     background: #ffffff;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    padding: 28px 32px 20px;
-    margin-bottom: 28px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.chart-header {
+    margin-bottom: 8px;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .chart-card h3 {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #1a1a2e;
-    margin-bottom: 16px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #f0f2f5;
+    margin-bottom: 4px;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.chart-subtitle {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.4;
 }
 
 /* ── Controls row ── */
@@ -80,4 +96,86 @@ body {
     color: #555;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* ── Unified controls ── */
+.unified-controls {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.unified-controls .control-group {
+    flex: 0 1 350px;
+    min-width: 280px;
+}
+
+/* ── Charts grid layout ── */
+.charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.chart-half {
+    grid-column: span 1;
+    margin-bottom: 0;
+}
+
+.chart-full {
+    grid-column: 1 / -1;
+    margin-bottom: 24px;
+}
+
+/* ── Unified legend ── */
+.unified-legend {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    padding: 12px 16px;
+    margin-bottom: 32px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+/* ── Responsive design ── */
+@media (max-width: 1200px) {
+    .charts-row {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-half {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .unified-controls {
+        flex-direction: column;
+    }
+
+    .unified-controls .control-group {
+        flex: 1 1 100%;
+        min-width: unset;
+    }
 }

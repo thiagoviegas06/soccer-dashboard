@@ -137,11 +137,37 @@ app.layout = html.Div([
     ], className='dashboard-header'),
 
     html.Div([
-        # Visualization 1: Line plot
+        # Unified filters at top
         html.Div([
-            html.H3("Goals Scored by Season"),
+            html.Div([
+                html.Label("Teams"),
+                dcc.Dropdown(
+                    id='unified-team-dropdown',
+                    options=team_options,
+                    value=default_teams,
+                    multi=True
+                ),
+            ], className='control-group'),
+            html.Div([
+                html.Label("Seasons"),
+                dcc.Dropdown(
+                    id='unified-season-dropdown',
+                    options=season_options,
+                    value=default_seasons,
+                    multi=True
+                ),
+            ], className='control-group'),
+        ], className='unified-controls'),
+
+        # Unified legend
+        html.Div(id='unified-legend', className='unified-legend'),
+
+        # Charts grid - 2 columns for first row, 1 for second
+        html.Div([
+            # Visualization 1: Scatter plot (top-left)
             html.Div([
                 html.Div([
+<<<<<<< HEAD
                     html.Label("Teams"),
                     dcc.Dropdown(
                         id='line-team-dropdown',
@@ -205,6 +231,30 @@ app.layout = html.Div([
             ], className='controls-row'),
             dcc.Graph(id='bar-graph')
         ], className='chart-card'),
+=======
+                    html.H3("Goals Conceded vs Goals Scored"),
+                    html.P("Bubble size represents Points earned | Opacity represents Season recency", className='chart-subtitle')
+                ], className='chart-header'),
+                dcc.Graph(id='scatter-graph', clickData=None)
+            ], className='chart-card chart-half'),
+
+            # Visualization 2: Bar plot (top-right)
+            html.Div([
+                html.Div([
+                    html.H3("Points by Season"),
+                ], className='chart-header'),
+                dcc.Graph(id='bar-graph', clickData=None)
+            ], className='chart-card chart-half'),
+        ], className='charts-row'),
+
+        # Visualization 3: Line plot (full width)
+        html.Div([
+            html.Div([
+                html.H3("Goals Scored by Season"),
+            ], className='chart-header'),
+            dcc.Graph(id='line-graph', clickData=None)
+        ], className='chart-card chart-full'),
+>>>>>>> da55da3 (updated dashboard layout)
 
     ], className='page-wrapper')
 ])
@@ -233,10 +283,18 @@ def update_line(selected_teams):
         y="Goals Scored",
         color="Team",
         symbol="Team",
-        title="Goals Scored by Season",
         color_discrete_map=color_map,
         symbol_map=team_symbols
     )
+
+    fig.update_traces(
+        marker=dict(size=8)
+    )
+
+    fig.update_layout(
+        margin=dict(l=50, r=50, t=15, b=50)
+    )
+
     return fig
 
 
@@ -256,7 +314,11 @@ def update_scatter(selected_teams, selected_season):
         color="Team",
         size="Points",
         hover_name="Team",
+<<<<<<< HEAD
         title=f"Goals Conceded vs Goals Scored ({selected_season})",
+=======
+        hover_data={"Points": True, "Goals Scored": True, "Goals Conceded": True, "Season": True},
+>>>>>>> da55da3 (updated dashboard layout)
         color_discrete_map=color_map
     )
 <<<<<<< HEAD
@@ -277,7 +339,17 @@ def update_scatter(selected_teams, selected_season):
             line=dict(width=1.5, color='white')  # White border for clarity
         )
     )
+<<<<<<< HEAD
 >>>>>>> f57de73 (updated dashboard)
+=======
+
+    fig.update_layout(
+        showlegend=False,
+        height=500,
+        margin=dict(l=50, r=50, t=15, b=50)
+    )
+
+>>>>>>> da55da3 (updated dashboard layout)
     return fig
 
 
@@ -296,6 +368,7 @@ def update_bar(selected_teams, selected_season):
         x="Team",
         y="Points",
         color="Team",
+<<<<<<< HEAD
         title=f"Points by Team ({selected_season})",
         color_discrete_map=color_map
     )
@@ -305,33 +378,50 @@ def update_bar(selected_teams, selected_season):
 <<<<<<< HEAD
 =======
 # Consolidated callback for team selection - handles dropdowns and click events
+=======
+        barmode="group",
+        color_discrete_map=color_map,
+        hover_data={"Season": True, "Team": True, "Points": True, "Placement": True},
+        text="Placement"  # Show tournament placement instead of points
+    )
+
+    fig.update_traces(
+        textposition="outside",  # Position text above the bars
+        texttemplate="%{text}º"  # Show placement with ordinal indicator
+    )
+
+    fig.update_layout(
+        xaxis_title="Season",
+        yaxis_title="Points",
+        margin=dict(l=50, r=50, t=15, b=50),
+        height=500,
+        showlegend=False
+    )
+
+    return fig
+
+
+# Consolidated callback for team selection - handles dropdown and click events
+>>>>>>> da55da3 (updated dashboard layout)
 @app.callback(
     [Output('shared-teams-store', 'data'),
-     Output('line-team-dropdown', 'value'),
-     Output('scatter-team-dropdown', 'value'),
-     Output('bar-team-dropdown', 'value')],
-    [Input('line-team-dropdown', 'value'),
-     Input('scatter-team-dropdown', 'value'),
-     Input('bar-team-dropdown', 'value'),
+     Output('unified-team-dropdown', 'value')],
+    [Input('unified-team-dropdown', 'value'),
      Input('line-graph', 'clickData'),
      Input('scatter-graph', 'clickData'),
      Input('bar-graph', 'clickData')],
     State('shared-teams-store', 'data')
 )
-def update_teams(line_teams, scatter_teams, bar_teams, line_click, scatter_click, bar_click, current_store):
+def update_teams(dropdown_teams, line_click, scatter_click, bar_click, current_store):
     if not callback_context.triggered:
-        return current_store, current_store, current_store, current_store
+        return current_store, current_store
 
     trigger_id = callback_context.triggered[0]['prop_id'].split('.')[0]
     selected_teams = current_store or default_teams
 
-    # Handle dropdown changes
-    if trigger_id == 'line-team-dropdown':
-        selected_teams = line_teams or default_teams
-    elif trigger_id == 'scatter-team-dropdown':
-        selected_teams = scatter_teams or default_teams
-    elif trigger_id == 'bar-team-dropdown':
-        selected_teams = bar_teams or default_teams
+    # Handle dropdown change
+    if trigger_id == 'unified-team-dropdown':
+        selected_teams = dropdown_teams or default_teams
 
     # Handle click-to-filter
     elif trigger_id == 'line-graph' and line_click:
@@ -369,32 +459,51 @@ def update_teams(line_teams, scatter_teams, bar_teams, line_click, scatter_click
     if not selected_teams:
         selected_teams = default_teams
 
-    return selected_teams, selected_teams, selected_teams, selected_teams
+    return selected_teams, selected_teams
 
 
 # Consolidated callback for season selection
 @app.callback(
     [Output('shared-seasons-store', 'data'),
-     Output('scatter-season-dropdown', 'value'),
-     Output('bar-season-dropdown', 'value')],
-    [Input('scatter-season-dropdown', 'value'),
-     Input('bar-season-dropdown', 'value')],
+     Output('unified-season-dropdown', 'value')],
+    Input('unified-season-dropdown', 'value'),
     State('shared-seasons-store', 'data')
 )
-def update_seasons(scatter_seasons, bar_seasons, current_store):
+def update_seasons(dropdown_seasons, current_store):
     if not callback_context.triggered:
-        return current_store, current_store, current_store
+        return current_store, current_store
 
-    trigger_id = callback_context.triggered[0]['prop_id'].split('.')[0]
+    selected_seasons = dropdown_seasons or current_store or default_seasons
 
-    if trigger_id == 'scatter-season-dropdown':
-        selected_seasons = scatter_seasons or default_seasons
-    elif trigger_id == 'bar-season-dropdown':
-        selected_seasons = bar_seasons or default_seasons
-    else:
-        selected_seasons = current_store or default_seasons
+    return selected_seasons, selected_seasons
 
-    return selected_seasons, selected_seasons, selected_seasons
+
+# Callback for unified legend
+@app.callback(
+    Output('unified-legend', 'children'),
+    Input('shared-teams-store', 'data')
+)
+def update_legend(selected_teams):
+    global color_cache
+
+    if not selected_teams:
+        selected_teams = default_teams
+
+    # Get color map for current teams
+    color_map, color_cache = assign_plot_colors(selected_teams, cached_colors=color_cache)
+
+    # Create legend items
+    legend_items = []
+    for team in sorted(selected_teams):
+        color = color_map.get(team, '#999999')
+        legend_items.append(
+            html.Div([
+                html.Div(style={'background-color': color, 'width': '16px', 'height': '16px', 'border-radius': '3px', 'display': 'inline-block', 'margin-right': '8px', 'vertical-align': 'middle'}),
+                html.Span(team, style={'vertical-align': 'middle'})
+            ], className='legend-item')
+        )
+
+    return html.Div(legend_items, className='legend-items')
 
 
 >>>>>>> f57de73 (updated dashboard)
