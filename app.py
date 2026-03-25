@@ -121,7 +121,7 @@ def update_line(selected_teams):
     )
 
     fig.update_traces(
-        marker=dict(size=8)
+        marker=dict(size=9)
     )
 
     fig.update_layout(
